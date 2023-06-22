@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bhavna's Chat App</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-image: url("https://example.com/flowers.jpg");
+      background-size: cover;
+      background-color: #FCE8FF;
+    }
+    
+    #name-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px;
+    }
+    
+    #name-input {
+      width: 300px;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    
+    #name-button {
+      width: 150px;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #FFB6C1;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    #chat-container {
+      display: none;
+    }
+    
+    #chat-box {
+      width: 400px;
+      height: 500px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      overflow: auto;
+      padding: 10px;
+    }
+    
+    #message-input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+    
+    #send-button {
+      width: 100px;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #FFB6C1;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .message {
+      margin-bottom: 10px;
+    }
+    
+    .sender {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="name-page">
+    <input type="text" id="name-input" placeholder="Enter your name">
+    <button id="name-button">Enter Chat</button>
+  </div>
+
+  <div id="chat-container">
+    <div id="chat-box"></div>
+    <input type="text" id="message-input" placeholder="Type a message">
+    <button id="send-button">Send</button>
+  </div>
+
+  <script>
+    const namePage = document.getElementById('name-page');
+    const nameInput = document.getElementById('name-input');
+    const nameButton = document.getElementById('name-button');
+    const chatContainer = document.getElementById('chat-container');
+    const chatBox = document.getElementById('chat-box');
+    const messageInput = document.getElementById('message-input');
+    const sendButton = document.getElementById('send-button');
+
+    nameButton.addEventListener('click', () => {
+      const name = nameInput.value.trim();
+
+      if (name !== '') {
+        namePage.style.display = 'none';
+        chatContainer.style.display = 'block';
+      }
+    });
+
+    sendButton.addEventListener('click', () => {
+      const name = nameInput.value.trim();
+      const message = messageInput.value.trim();
+
+      if (name !== '' && message !== '') {
+        const messageElement = document.createElement('div');
+        messageElement.className = 'message';
+        messageElement.innerHTML = `<span class="sender">${name}:</span> ${message}`;
+        chatBox.appendChild(messageElement);
+        messageInput.value = '';
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+    });
+
+    messageInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        sendButton.click();
+      }
+    });
+  </script>
+</body>
+</html>
